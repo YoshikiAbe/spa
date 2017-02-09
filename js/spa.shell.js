@@ -10,7 +10,7 @@ spa.shell = (function () {
     var
         configMap = {
             anchor_schema_map : {
-                chat: {chat: true, closed: true}
+                chat: {open: true, closed: true}
             },
             main_html: '<div class="spa-shell-head">'
                             + '<div class="spa-shell-head-logo"></div>'
@@ -234,7 +234,7 @@ spa.shell = (function () {
     // イベントハンドラ/onClickChat/開始
     onClickChat = function () {
         changeAnchorPart({
-            chat: (stateMap.is_chat_retracted ? 'open' : 'close')
+            chat: (stateMap.is_chat_retracted ? 'open' : 'closed')
         });
         return false;
     };

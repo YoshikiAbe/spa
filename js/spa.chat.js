@@ -37,13 +37,24 @@ spa.chat = (function () {
 
     // パブリックメソッド開始
     // パブリックメソッド/configModule/開始
-    // 目的: 許可されたキーの構成を調整する
+    // 用例: spa.chat.configModule({slider_open_em: 18});
+    // 目的: 初期化前にモジュールを構成する
     // 引数: 構成可能なキーバリューマップ
-    //   * color_name - 使用する色
-    // 設定
-    //   * configMap.settable_map 許可されたキーを宣言する
+    //   * set_chat_anchor - オープンまたはクローズ状態を示すようにURIアンカーを変更する
+    //     コールバック。このコールバックは要求された状態を満たせない場合にはfalseを返さなければいけない。
+    //   * chat_model - インスタントメッセージングと
+    //     やり取りするメソッドを提供するチャットモデルオブジェクト。
+    //   * people_model - モデルが保持する人々のリストを管理する
+    //     メソッドを提供するピープルモデルオブジェクト。
+    //   * slider_*構成。すべてのオプションのスカラー。
+    //     完全なリストはmapConfig.settable_mapを参照。
+    //     用例: slider_open_emはem単位のオープン時の高さ
+    // 動作:
+    //    指定された引数で内部構成データ構造(configMap)を更新する。
+    //    その他の動作は行わない。
     // 戻り値: true
-    // 例外発行: なし
+    // 例外発行: 受け入れられない引数や欠如した引数では
+    //          JavaScriptエラーオブジェクトとスタックトレース
     //
     configModule = function (input_map) {
         spa.util.setConfigMap({
@@ -55,10 +66,16 @@ spa.chat = (function () {
     // パブリックメソッド/configModule/終了
 
     // パブリックメソッド/initModule/開始
-    // 目的: モジュールを初期化する
+    // 用例: spa.chat.initModule($('#div_id'));
+    // 目的:
+    //   ユーザに機能を提供するようにチャットに支持する
     // 引数:
-    //   * $container この機能が使うjQuery要素
-    // 戻り値: true
+    //   * $append_target (例: $('#div_id'))
+    //   一つのDOMコンテナを表すjQueryコレクション
+    // 動作:
+    //   指定されたコンテナにチャットスライダーを付加し、HTMLコンテンツで埋める。
+    //   そして、要素、イベント、ハンドラを初期化し、ユーザにチャットルームインタフェースを提供する。
+    // 戻り値: 成功時にはtrue、失敗時にはfalse。
     // 例外発行: なし
     //
     initModule = function ($container) {
@@ -68,6 +85,20 @@ spa.chat = (function () {
         return true;
     };
     // パブリックメソッド/initModule/終了
+
+    // パブリックメソッド/setSliderPosition/開始
+    //
+    // 用例: spa.chat.setSliderPosition('closed');
+    // 目的: チャットスライダーが要求された状態になるようにする
+    // 引数;
+    //   * position_type - enum('closed', 'opend', または'hidden')
+    //   * callback - アニメーションの最後のオプションのコールバック。
+    //     (コールバックはひk数としてスライダーDOM要素を受け取る)
+    // 戻り値:
+    //   * true - 要求された状態を実現した
+    //   * false - 要求された状態を実現していない
+    // 例外発行: なし
+    //
 
     // パブリックメソッドを戻す
     return {

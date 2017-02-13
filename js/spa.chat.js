@@ -9,7 +9,7 @@ spa.chat = (function () {
     // モジュールスコープ変数開始
     var
         configMap = {
-            main_hrml : String()
+            main_html : String()
                 + '<div class="spa-chat">'
                   + '<div class="spa-chat-head">'
                     + '<div class="spa-chat=head=toggle">'

@@ -147,8 +147,8 @@ spa.chat = (function () {
 
             case 'closed' :
                 height_px = stateMap.slider_clesed_px;
-                animate_time = stateMap.slider_close_time;
-                slider_title = stateMap.slider_closed_title;
+                animate_time = configMap.slider_close_time;
+                slider_title = configMap.slider_closed_title;
                 toggle_text = '+';
             break;
             // 未知のposition_typeに対処する

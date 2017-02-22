@@ -29,16 +29,20 @@ spa.shell = (function () {
             chat_extend_height: 450,
             chat_retract_height: 15,
             chat_extend_title: 'Click to restrect',
-            chat_retract_title: 'Click to extend'
+            chat_retract_title: 'Click to extend',
+            resize_interval: 200
         },
         stateMap = {
-            anchor_map: {}
+            $container: undefined,
+            anchor_map: {},
+            resize_idto: undefined
         },
         jqueryMap = {},
 
         copyAnchorMap, setJqueryMap,
         changeAnchorPart, onHashChange,
-        setChatAnchor, initModule;
+        setChatAnchor, initModule, onResize
+        ;
     // モジュールスコープ変数終了
 
     // ユーティリティメソッド開始
@@ -186,6 +190,20 @@ spa.shell = (function () {
     };
     // イベントハンドラ/onHashChange/終了
 
+    // イベントハンドラ/onResize/開始
+    onResize = function () {
+        if (stateMap.resize_idto) {return true;}
+
+        spa.chat.handleResize();
+        stateMap.resize_idto = setTimeout(
+            function () {stateMap.resize_idto = undefined;},
+            configMap.resize_interval
+        );
+
+        return true;
+    };
+    // イベントハンドラ/onResize/終了
+
     // イベントハンドラ終了
 
     // コールバック開始
@@ -247,6 +265,7 @@ spa.shell = (function () {
         // トリガーイベントはアンカーがロード状態とみなせることを保証するために使う。
         //
         $(window)
+            .bind('resize', onResize)
             .bind('hashchange', onHashChange)
             .trigger('hashchange');
 

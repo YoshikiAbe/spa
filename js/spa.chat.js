@@ -12,12 +12,11 @@ spa.chat = (function () {
             main_html : String()
                 + '<div class="spa-chat">'
                   + '<div class="spa-chat-head">'
-                    + '<div class="spa-chat=head=toggle">'
+                    + '<div class="spa-chat-head-toggle">+</div>'
                     + '<div class="spa-chat-head-title">'
                       + 'Chat'
                     + '</div>'
                   + '</div>'
-                + '</div>'
                 + '<div class="spa-chat-closer">x</div>'
                 + '<div class="spa-chat-sizer">'
                   + '<div class="spa-chat-msgs"></div>'
@@ -82,7 +81,7 @@ spa.chat = (function () {
         jqueryMap = {
             $slider: $slider,
             $head: $slider.find('.spa-chat-head'),
-            $toggle: $slider.find('.spa-chat-toggle'),
+            $toggle: $slider.find('.spa-chat-head-toggle'),
             $title: $slider.find('.spa-chat-head-title'),
             $sizer: $slider.find('.spa-chat-sizer'),
             $msgs: $slider.find('.spa-chat-msgs'),
